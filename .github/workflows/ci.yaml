@@ -23,11 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # - name: Run Ruff check (I violations)
-      #   run: ruff check . --select I
+      - name: Run Ruff check (I violations)
+        run: ruff check . --select I
 
-      # - name: Run Ruff formatting check
-      #   run: ruff format --check
+      - name: Run Ruff formatting check
+        run: ruff format --check
 
-      # - name: Run full Ruff check
-      #   run: ruff check .
+      - name: Run full Ruff check
+        run: ruff check .
