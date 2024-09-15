@@ -19,12 +19,12 @@ class Dumpster(Snake):
         self.border_cells = borders_cells
 
     def make_decision(self, board_state):
-        direction_dict_code_key = {0: "RIGHT", 1: "LEFT", 2: "UP", 3: "DOWN", 4: "CONTINUE"}
-        direction_dict_decision_key = {"RIGHT": 0, "LEFT": 1, "UP": 2, "DOWN": 3, "CONTINUE": 4}
+        direction_dict_code_key = {0: 'RIGHT', 1: 'LEFT', 2: 'UP', 3: 'DOWN', 4: 'CONTINUE'}
+        direction_dict_decision_key = {'RIGHT': 0, 'LEFT': 1, 'UP': 2, 'DOWN': 3, 'CONTINUE': 4}
         decision = Direction.CONTINUE
         head = self.head
-        fruits = board_state["fruits"]
-        snakes = board_state["snakes"]
+        fruits = board_state['fruits']
+        snakes = board_state['snakes']
         enemy_snake = None
         enemy_snake_head = None
         if len(snakes) > 1:
@@ -33,13 +33,13 @@ class Dumpster(Snake):
         boarder_cell_list = [list(elem) for elem in self.border_cells]
         skull_pos = [-11, -11]
         for fruit in fruits:
-            if fruit.kind["name"] == "SKULL":
+            if fruit.kind['name'] == 'SKULL':
                 skull_pos[0] = fruit.pos[0]
                 skull_pos[1] = fruit.pos[1]
 
-        beneficial_fruits = [fruit for fruit in fruits if fruit.kind["name"] in ["STRAWBERRY", "DRAGON_FRUIT"]]
+        beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ['STRAWBERRY', 'DRAGON_FRUIT']]
         beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
-        harmful_fruits = [fruit for fruit in fruits if fruit.kind["name"] == "BOMB"]
+        harmful_fruits = [fruit for fruit in fruits if fruit.kind['name'] == 'BOMB']
         harmful_fruits_pos = [fruit.pos for fruit in harmful_fruits]
 
         available_directions = [Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT]
@@ -179,10 +179,10 @@ class Dumpster(Snake):
         #             else:
         #                 ally_destination = knife_pos_list[i]
         possible_steps = {
-            "up": [head[0], head[1] - 1],
-            "down": [head[0], head[1] + 1],
-            "right": [head[0] + 1, head[1]],
-            "left": [head[0] - 1, head[1]],
+            'up': [head[0], head[1] - 1],
+            'down': [head[0], head[1] + 1],
+            'right': [head[0] + 1, head[1]],
+            'left': [head[0] - 1, head[1]],
         }
         if head[0] < ally_destination[0]:
             if Direction.RIGHT in available_directions:
@@ -228,11 +228,11 @@ class Dumpster(Snake):
         return decision
 
     def get_target(self, board_state, available_directions):
-        fruits = board_state["fruits"]
-        snakes = board_state["snakes"]
+        fruits = board_state['fruits']
+        snakes = board_state['snakes']
         head = self.head
         is_alone_on_board = len(snakes) == 1
-        beneficial_fruits = [fruit for fruit in fruits if fruit.kind["name"] in ["STRAWBERRY", "DRAGON_FRUIT"]]
+        beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ['STRAWBERRY', 'DRAGON_FRUIT']]
         beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
         if is_alone_on_board:
             ally_distance_to_fruit = get_distances_to_fruit(head, beneficial_fruits_pos)
@@ -258,16 +258,16 @@ class Dumpster(Snake):
             ally_destination = enemy_destination
 
         enemy_target_bank = []
-        special_items = [fruit for fruit in fruits if fruit.kind["name"] in ["SHIELD", "KING", "KNIFE"]]
+        special_items = [fruit for fruit in fruits if fruit.kind['name'] in ['SHIELD', 'KING', 'KNIFE']]
 
-        shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "SHIELD"]
-        shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "SHIELD"]
+        shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == 'SHIELD']
+        shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'SHIELD']
 
-        king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "KING"]
-        king_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "KING"]
+        king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'KING']
+        king_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == 'KING']
 
-        knife_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "KNIFE"]
-        knife_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "KNIFE"]
+        knife_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'KNIFE']
+        knife_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == 'KNIFE']
         if not self.king and len(snakes) > 1:
             if len(king_pos_list) >= 1:
                 for i in range(len(king_pos_list)):

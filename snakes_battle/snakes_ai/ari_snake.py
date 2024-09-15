@@ -34,7 +34,7 @@ class AriSnake(Snake):
         # dont eat harmful_fruits and dont hit on yourself
         # need to check if in your direction have harmful fruits
         try:
-            fruits = board_state["fruits"]
+            fruits = board_state['fruits']
             pos = self.body_position
 
             not_harmful_fruits = self.remove_harmful_fruits(fruits)
@@ -51,7 +51,7 @@ class AriSnake(Snake):
             self.find_closest_fruit(not_harmful_fruits)
             self.find_closest_fruit(fruits)
 
-            snakes = board_state["snakes"]
+            snakes = board_state['snakes']
             enemy_snakes = self.find_closet_enemy_snakes(snakes)
 
             for fruit in not_harmful_fruits:
@@ -221,8 +221,8 @@ class AriSnake(Snake):
 
     def is_good_pos(self, board_state, direction):
         pos = self.body_position
-        fruits = board_state["fruits"]
-        snakes = board_state["snakes"]
+        fruits = board_state['fruits']
+        snakes = board_state['snakes']
         harmful_fruits = self.get_harmful_fruits(fruits)
         enemy_snakes = self.find_closet_enemy_snakes(snakes)
         x_head = self.head[0]

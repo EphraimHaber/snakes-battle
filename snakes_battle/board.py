@@ -75,7 +75,7 @@ class Board:
 
             snakes_copy.append(snake)
 
-        return {"snakes": snakes_copy, "fruits": copy.deepcopy(self.fruits)}
+        return {'snakes': snakes_copy, 'fruits': copy.deepcopy(self.fruits)}
 
     def total_game_time(self):
         return time.time() - self.start_time

@@ -41,7 +41,7 @@ SNAKES_COLORS = [
     (28, 154, 57),
     (0, 97, 162),
 ]
-DEAD_SNAKE_IMAGE_PATH = "snakes_battle/images/dead_icon.png"
+DEAD_SNAKE_IMAGE_PATH = 'snakes_battle/images/dead_icon.png'
 
 
 # General
@@ -65,7 +65,7 @@ NUMBER_OF_BENEFICIAL_FRUITS_ON_BOARD = 2
 ######################################
 
 # Main menu constants
-MENU_BACKGROUND_IMAGE_PATH = "snakes_battle/images/menu_bg.jpg"
+MENU_BACKGROUND_IMAGE_PATH = 'snakes_battle/images/menu_bg.jpg'
 MENUS_BUTTON_COLOR = (15, 200, 220)
 BUTTONS_WIDTH = 250
 BUTTONS_HEIGHT = 125

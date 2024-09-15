@@ -23,7 +23,7 @@ class Yakov(Snake):
 
         for fruit in fruits:
             dis = abs(head[0] - fruit.pos[0]) + abs(head[1] - fruit.pos[1])
-            if fruit.kind["name"] == kind and (dis < distance):
+            if fruit.kind['name'] == kind and (dis < distance):
                 distance = dis
                 best = fruit.pos
                 the_fruit = fruit
@@ -44,7 +44,7 @@ class Yakov(Snake):
                     return [head[0] + 1, head[1]]
                 else:
                     for fruit in fruits:
-                        if fruit.pos == [head[0] + 1, head[1]] and fruit.kind["name"] != "SKULL":
+                        if fruit.pos == [head[0] + 1, head[1]] and fruit.kind['name'] != 'SKULL':
                             return [head[0] + 1, head[1]]
 
         if (head[0] - 1, head[1]) not in self.border_cells:
@@ -53,7 +53,7 @@ class Yakov(Snake):
                     return [head[0] - 1, head[1]]
                 else:
                     for fruit in fruits:
-                        if fruit.pos == [head[0] - 1, head[1]] and fruit.kind["name"] != "SKULL":
+                        if fruit.pos == [head[0] - 1, head[1]] and fruit.kind['name'] != 'SKULL':
                             return [head[0] - 1, head[1]]
 
         if (head[0], head[1] - 1) not in self.border_cells:
@@ -62,7 +62,7 @@ class Yakov(Snake):
                     return [head[0], head[1] - 1]
                 else:
                     for fruit in fruits:
-                        if fruit.pos == [head[0], head[1] - 1] and fruit.kind["name"] != "SKULL":
+                        if fruit.pos == [head[0], head[1] - 1] and fruit.kind['name'] != 'SKULL':
                             return [head[0], head[1] - 1]
 
         if (head[0], head[1] + 1) not in self.border_cells:
@@ -71,7 +71,7 @@ class Yakov(Snake):
                     return [head[0], head[1] + 1]
                 else:
                     for fruit in fruits:
-                        if fruit.pos == [head[0], head[1] + 1] and fruit.kind["name"] != "SKULL":
+                        if fruit.pos == [head[0], head[1] + 1] and fruit.kind['name'] != 'SKULL':
                             return [head[0], head[1] + 1]
 
         if [head[0], head[1] + 1] in his_snake[1:] or [head[0], head[1] + 1] in my_snake[1:]:
@@ -183,10 +183,10 @@ class Yakov(Snake):
         head = self.body_position[0]
         my_options = []
 
-        best_strawberry = self.closest("STRAWBERRY", fruits)
-        best_king = self.closest("KING", fruits)
-        best_dragon_fruit = self.closest("DRAGON_FRUIT", fruits)
-        best_shield = self.closest("SHIELD", fruits)
+        best_strawberry = self.closest('STRAWBERRY', fruits)
+        best_king = self.closest('KING', fruits)
+        best_dragon_fruit = self.closest('DRAGON_FRUIT', fruits)
+        best_shield = self.closest('SHIELD', fruits)
 
         my_options.append(best_strawberry)
         my_options.append(best_king)
@@ -210,10 +210,10 @@ class Yakov(Snake):
     def get_best_plain(self, the_min, my_options, fruits, his_snake):
         head = self.body_position[0]
         for option in my_options:
-            if option["value"] == the_min:
-                current_best = option["place"][0]
+            if option['value'] == the_min:
+                current_best = option['place'][0]
                 if self.bad_next(his_snake, fruits, self.get_direction(current_best)):
-                    my_options1 = [optio for optio in my_options if optio["value"] != option["value"]]
+                    my_options1 = [optio for optio in my_options if optio['value'] != option['value']]
                     if len(my_options1) == 0:
                         return self.find_not_die(head, fruits, his_snake)
                     else:
@@ -229,13 +229,13 @@ class Yakov(Snake):
                 if not self.bad_next([his_snake[0]], fruits, self.get_direction(current_best)):
                     return current_best
                 elif i == int(len(his_snake) * 0.80):
-                    the_min = min(option["value"] for option in my_options)
+                    the_min = min(option['value'] for option in my_options)
                     return self.get_best_plain(the_min, my_options, fruits, his_snake)
         else:
-            the_min = min(option["value"] for option in my_options)
+            the_min = min(option['value'] for option in my_options)
             return self.get_best_plain(the_min, my_options, fruits, his_snake)
 
-        the_min = min(option["value"] for option in my_options)
+        the_min = min(option['value'] for option in my_options)
         return self.get_best_plain(the_min, my_options, fruits, his_snake)
 
     def get_best_king(self, fruits, his_snake, my_options):
@@ -283,7 +283,7 @@ class Yakov(Snake):
                     elif i == int(len(his_snake) * 0.80):
                         return self.get_best_knife(fruits, [his_snake[0]], my_options)
         else:
-            the_min = min(option["value"] for option in my_options)
+            the_min = min(option['value'] for option in my_options)
             return self.get_best_plain(the_min, my_options, fruits, his_snake)
 
         return self.get_best_knife(fruits, [his_snake[0]], my_options)
@@ -305,45 +305,45 @@ class Yakov(Snake):
 
         my_options = []
         if not king:
-            close_king = {"place": self.closest("KING", fruits), "name": "KING"}
-            close_king["value"] = close_king["place"][1]
-            if close_king["place"][1] != self.MAX_DISTANCE:
-                if (abs(head[0] - close_king["place"][0][0]) + abs(head[1] - close_king["place"][0][1])) <= close_king[
-                    "place"
+            close_king = {'place': self.closest('KING', fruits), 'name': 'KING'}
+            close_king['value'] = close_king['place'][1]
+            if close_king['place'][1] != self.MAX_DISTANCE:
+                if (abs(head[0] - close_king['place'][0][0]) + abs(head[1] - close_king['place'][0][1])) <= close_king[
+                    'place'
                 ][2].lifespan:
                     my_options.append(close_king)
         if not shield:
-            close_shield = {"place": self.closest("SHIELD", fruits), "name": "SHIELD"}
-            close_shield["value"] = close_shield["place"][1] * 2
-            if close_shield["place"][1] != self.MAX_DISTANCE:
+            close_shield = {'place': self.closest('SHIELD', fruits), 'name': 'SHIELD'}
+            close_shield['value'] = close_shield['place'][1] * 2
+            if close_shield['place'][1] != self.MAX_DISTANCE:
                 if (
-                    abs(head[0] - close_shield["place"][0][0]) + abs(head[1] - close_shield["place"][0][1])
-                ) <= close_shield["place"][2].lifespan:
+                    abs(head[0] - close_shield['place'][0][0]) + abs(head[1] - close_shield['place'][0][1])
+                ) <= close_shield['place'][2].lifespan:
                     my_options.append(close_shield)
         if not knife:
-            close_knife = {"place": self.closest("KNIFE", fruits), "name": "KNIFE"}
+            close_knife = {'place': self.closest('KNIFE', fruits), 'name': 'KNIFE'}
             if len(his_snake) > 10:
-                close_knife["value"] = close_knife["place"][1] * 2.6
+                close_knife['value'] = close_knife['place'][1] * 2.6
             else:
-                close_knife["value"] = close_knife["place"][1] * 3.6
-            if close_knife["place"][1] != self.MAX_DISTANCE:
+                close_knife['value'] = close_knife['place'][1] * 3.6
+            if close_knife['place'][1] != self.MAX_DISTANCE:
                 if (
-                    abs(head[0] - close_knife["place"][0][0]) + abs(head[1] - close_knife["place"][0][1])
-                ) <= close_knife["place"][2].lifespan:
+                    abs(head[0] - close_knife['place'][0][0]) + abs(head[1] - close_knife['place'][0][1])
+                ) <= close_knife['place'][2].lifespan:
                     my_options.append(close_knife)
 
-        close_strawberry = {"place": self.closest("STRAWBERRY", fruits), "name": "STRAWBERRY"}
-        close_dragon_fruit = {"place": self.closest("DRAGON_FRUIT", fruits), "name": "DRAGON_FRUIT"}
+        close_strawberry = {'place': self.closest('STRAWBERRY', fruits), 'name': 'STRAWBERRY'}
+        close_dragon_fruit = {'place': self.closest('DRAGON_FRUIT', fruits), 'name': 'DRAGON_FRUIT'}
 
-        close_strawberry["value"] = close_strawberry["place"][1] * 3.2
-        close_dragon_fruit["value"] = close_dragon_fruit["place"][1] * 2.9
+        close_strawberry['value'] = close_strawberry['place'][1] * 3.2
+        close_dragon_fruit['value'] = close_dragon_fruit['place'][1] * 2.9
 
-        if close_strawberry["place"][1] != self.MAX_DISTANCE:
+        if close_strawberry['place'][1] != self.MAX_DISTANCE:
             my_options.append(close_strawberry)
-        if close_dragon_fruit["place"][1] != self.MAX_DISTANCE:
+        if close_dragon_fruit['place'][1] != self.MAX_DISTANCE:
             my_options.append(close_dragon_fruit)
 
-        the_min = min(option["value"] for option in my_options)
+        the_min = min(option['value'] for option in my_options)
         if his_snake == []:
             return self.get_for_single(fruits, [])
         elif not king and not knife and not shield:
@@ -358,8 +358,8 @@ class Yakov(Snake):
     def make_decision(self, board_state):
         direction = self.direction
 
-        fruits = board_state["fruits"]
-        snakes = board_state["snakes"]
+        fruits = board_state['fruits']
+        snakes = board_state['snakes']
         best = self.get_best(fruits, snakes)
         direction = self.get_direction(best)
 

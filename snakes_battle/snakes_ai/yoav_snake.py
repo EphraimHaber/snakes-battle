@@ -37,7 +37,7 @@ class YoavSnake(Snake):
         head = self.body_position[0]
         for snake in snakes:
             if self.knife or self.king:
-                if snake._name != "YoavSnake":
+                if snake._name != 'YoavSnake':
                     return False
             curr_snake = snake.body_position
             for body_part in curr_snake:
@@ -72,15 +72,15 @@ class YoavSnake(Snake):
         return Direction.CONTINUE
 
     def no_problem_found(self, board_state, cmd):
-        fruits = board_state["fruits"]
-        snakes = board_state["snakes"]
+        fruits = board_state['fruits']
+        snakes = board_state['snakes']
         if self.is_harmful(fruits, cmd) or self.is_snake(snakes, cmd) or self.is_border(cmd):
             return False
         return True
 
     def make_decision(self, board_state):
         up, down, right, left = self.directions
-        fruits = board_state["fruits"]
+        fruits = board_state['fruits']
         fruit = self.get_next_fruit(fruits)
         head = self.body_position[0]
 

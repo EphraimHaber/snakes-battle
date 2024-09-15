@@ -8,16 +8,16 @@ class ChaimSnake(Snake):
 
         self.version = 1.0
         self.border_cells = borders_cells
-        self.beneficial_fruits = [fruit["name"] for fruit in FruitKind.beneficial_fruits]
-        self.harmful_fruits = [fruit["name"] for fruit in FruitKind.harmful_fruits]
-        self.special_fruits = [fruit["name"] for fruit in FruitKind.special_fruits]
+        self.beneficial_fruits = [fruit['name'] for fruit in FruitKind.beneficial_fruits]
+        self.harmful_fruits = [fruit['name'] for fruit in FruitKind.harmful_fruits]
+        self.special_fruits = [fruit['name'] for fruit in FruitKind.special_fruits]
 
     def is_fruit_up_ok(self, fruits):
         for fruit in fruits:
             if (
                 self.head[1] - 1 == fruit.pos[1]
                 and self.head[0] == fruit.pos[0]
-                and fruit.kind["name"] in self.harmful_fruits
+                and fruit.kind['name'] in self.harmful_fruits
             ):
                 # print('up yes')
                 return False
@@ -28,7 +28,7 @@ class ChaimSnake(Snake):
             if (
                 self.head[1] + 1 == fruit.pos[1]
                 and self.head[0] == fruit.pos[0]
-                and fruit.kind["name"] in self.harmful_fruits
+                and fruit.kind['name'] in self.harmful_fruits
             ):
                 # print('down yes')
                 return False
@@ -39,7 +39,7 @@ class ChaimSnake(Snake):
             if (
                 self.head[0] + 1 == fruit.pos[0]
                 and self.head[1] == fruit.pos[1]
-                and fruit.kind["name"] in self.harmful_fruits
+                and fruit.kind['name'] in self.harmful_fruits
             ):
                 # print('right yes')
                 return False
@@ -50,7 +50,7 @@ class ChaimSnake(Snake):
             if (
                 self.head[0] - 1 == fruit.pos[0]
                 and self.head[1] == fruit.pos[1]
-                and fruit.kind["name"] in self.harmful_fruits
+                and fruit.kind['name'] in self.harmful_fruits
             ):
                 # print('left yes')
                 return False
@@ -63,10 +63,10 @@ class ChaimSnake(Snake):
             for snake_pos in snake.body_position:
                 if self.head[1] - 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
                     if self.head[0] + 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
-                        return ["up", "right"]
+                        return ['up', 'right']
                     if self.head[0] - 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
-                        return ["up", "left"]
-                    return ["up"]
+                        return ['up', 'left']
+                    return ['up']
         return []
 
     def is_snake_down_ok(self, snakes):
@@ -74,10 +74,10 @@ class ChaimSnake(Snake):
             for snake_pos in snake.body_position:
                 if self.head[1] + 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
                     if self.head[0] + 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
-                        return ["down", "right"]
+                        return ['down', 'right']
                     if self.head[0] - 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
-                        return ["down", "left"]
-                    return ["down"]
+                        return ['down', 'left']
+                    return ['down']
         return []
 
     def is_snake_right_ok(self, snakes):
@@ -85,10 +85,10 @@ class ChaimSnake(Snake):
             for snake_pos in snake.body_position:
                 if self.head[0] + 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
                     if self.head[1] - 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
-                        return ["right", "up"]
+                        return ['right', 'up']
                     if self.head[1] + 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
-                        return ["right", "down"]
-                    return ["right"]
+                        return ['right', 'down']
+                    return ['right']
         return []
 
     def is_snake_left_ok(self, snakes):
@@ -96,10 +96,10 @@ class ChaimSnake(Snake):
             for snake_pos in snake.body_position:
                 if self.head[0] - 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
                     if self.head[1] - 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
-                        return ["left", "up"]
+                        return ['left', 'up']
                     if self.head[1] + 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
-                        return ["left", "down"]
-                    return ["left"]
+                        return ['left', 'down']
+                    return ['left']
         return []
 
     def is_snake_both_ok(self, snakes):
@@ -107,10 +107,10 @@ class ChaimSnake(Snake):
             for snake_pos in snake.body_position:
                 if self.head[0] - 1 == snake_pos[0] and self.head[1] == snake_pos[1]:
                     if self.head[1] - 1 == snake_pos[1] and self.head[0] == snake_pos[0]:
-                        return ["left", "up"]
+                        return ['left', 'up']
                     if self.head[0] + 1 == snake_pos[0] and self.head[0] == snake_pos[0]:
-                        return ["left", "down"]
-                    return ["left"]
+                        return ['left', 'down']
+                    return ['left']
         return []
 
     def try_to_go(self, up, down, left, right):
@@ -183,50 +183,50 @@ class ChaimSnake(Snake):
                 #     return ['up',"right"]
                 # if self.head[0]-1 == cell[0]:
                 #     return ["up","left"]
-                return ["up"]
+                return ['up']
 
             elif self.head[1] + 1 == cell[1] and self.head[0] == cell[0]:
                 # if self.head[0]+1 == cell[0]:
                 #     return ['down',"right"]
                 # if self.head[0]-1 == cell[0]:
                 #     return ["down","left"]
-                return ["down"]
+                return ['down']
             elif self.head[0] + 1 == cell[0] and self.head[1] == cell[1]:
                 # if self.head[0]+1 == cell[0]:
                 #     return ['down',"right"]
                 # if self.head[0]-1 == cell[0]:
                 #     return ["down","left"]
-                return ["right"]
+                return ['right']
             elif self.head[0] - 1 == cell[0] and self.head[1] == cell[1]:
                 # if self.head[0]+1 == cell[0]:
                 #     return ['down',"right"]
                 # if self.head[0]-1 == cell[0]:
                 #     return ["down","left"]
-                return ["left"]
+                return ['left']
         return []
 
     def make_decision(self, board_state):
-        all_fruits = board_state["fruits"]
+        all_fruits = board_state['fruits']
         fruits = [
-            f for f in all_fruits if f.kind["name"] in self.beneficial_fruits or f.kind["name"] in self.special_fruits
+            f for f in all_fruits if f.kind['name'] in self.beneficial_fruits or f.kind['name'] in self.special_fruits
         ]
         # ben_fruits = []
         pos = self.body_position
         index_to_go = 0
-        all_snakes = board_state["snakes"]
+        all_snakes = board_state['snakes']
         my_snake = [s for s in all_snakes if self == s]
 
         min_far = fruits[0]
         up = right = left = down = True
 
         # check celss
-        if "up" in self.check_cells():
+        if 'up' in self.check_cells():
             up = False
-        if "right" in self.check_cells():
+        if 'right' in self.check_cells():
             right = False
-        if "left" in self.check_cells():
+        if 'left' in self.check_cells():
             left = False
-        if "down" in self.check_cells():
+        if 'down' in self.check_cells():
             down = False
         # /////////////////////////////
 
@@ -242,61 +242,61 @@ class ChaimSnake(Snake):
         # /////////////////////////////
 
         if self.knife or self.king:
-            if "up" in self.is_snake_up_ok(my_snake):
+            if 'up' in self.is_snake_up_ok(my_snake):
                 up = False
-            if "right" in self.is_snake_up_ok(my_snake):
+            if 'right' in self.is_snake_up_ok(my_snake):
                 right = False
-            if "left" in self.is_snake_up_ok(my_snake):
+            if 'left' in self.is_snake_up_ok(my_snake):
                 left = False
 
-            if "down" in self.is_snake_down_ok(my_snake):
+            if 'down' in self.is_snake_down_ok(my_snake):
                 down = False
-            if "right" in self.is_snake_down_ok(my_snake):
+            if 'right' in self.is_snake_down_ok(my_snake):
                 right = False
-            if "left" in self.is_snake_down_ok(my_snake):
+            if 'left' in self.is_snake_down_ok(my_snake):
                 left = False
 
-            if "right" in self.is_snake_right_ok(my_snake):
+            if 'right' in self.is_snake_right_ok(my_snake):
                 right = False
-            if "up" in self.is_snake_right_ok(my_snake):
+            if 'up' in self.is_snake_right_ok(my_snake):
                 up = False
-            if "down" in self.is_snake_right_ok(my_snake):
+            if 'down' in self.is_snake_right_ok(my_snake):
                 down = False
 
-            if "left" in self.is_snake_left_ok(my_snake):
+            if 'left' in self.is_snake_left_ok(my_snake):
                 left = False
-            if "up" in self.is_snake_left_ok(my_snake):
+            if 'up' in self.is_snake_left_ok(my_snake):
                 up = False
-            if "down" in self.is_snake_left_ok(my_snake):
+            if 'down' in self.is_snake_left_ok(my_snake):
                 down = False
 
         else:
-            if "up" in self.is_snake_up_ok(all_snakes):
+            if 'up' in self.is_snake_up_ok(all_snakes):
                 up = False
-            if "right" in self.is_snake_up_ok(all_snakes):
+            if 'right' in self.is_snake_up_ok(all_snakes):
                 right = False
-            if "left" in self.is_snake_up_ok(all_snakes):
+            if 'left' in self.is_snake_up_ok(all_snakes):
                 left = False
 
-            if "down" in self.is_snake_down_ok(all_snakes):
+            if 'down' in self.is_snake_down_ok(all_snakes):
                 down = False
-            if "right" in self.is_snake_down_ok(all_snakes):
+            if 'right' in self.is_snake_down_ok(all_snakes):
                 right = False
-            if "left" in self.is_snake_down_ok(all_snakes):
+            if 'left' in self.is_snake_down_ok(all_snakes):
                 left = False
 
-            if "right" in self.is_snake_right_ok(all_snakes):
+            if 'right' in self.is_snake_right_ok(all_snakes):
                 right = False
-            if "up" in self.is_snake_right_ok(all_snakes):
+            if 'up' in self.is_snake_right_ok(all_snakes):
                 up = False
-            if "down" in self.is_snake_right_ok(all_snakes):
+            if 'down' in self.is_snake_right_ok(all_snakes):
                 down = False
 
-            if "left" in self.is_snake_left_ok(all_snakes):
+            if 'left' in self.is_snake_left_ok(all_snakes):
                 left = False
-            if "up" in self.is_snake_left_ok(all_snakes):
+            if 'up' in self.is_snake_left_ok(all_snakes):
                 up = False
-            if "down" in self.is_snake_left_ok(all_snakes):
+            if 'down' in self.is_snake_left_ok(all_snakes):
                 down = False
 
         if not self.is_fruit_up_ok(all_fruits):
@@ -313,11 +313,11 @@ class ChaimSnake(Snake):
             left = False
 
         for index in range(len(fruits)):
-            if fruits[index].kind["name"] == "KING":
+            if fruits[index].kind['name'] == 'KING':
                 if abs(self.head[0] + self.head[1] - fruits[index].pos[0] + fruits[index].pos[1]) < 15:
                     index_to_go = index
                     return self.fruits_to_go(fruits[index_to_go], up, down, left, right)
-            if fruits[index].kind["name"] == "SHIELD":
+            if fruits[index].kind['name'] == 'SHIELD':
                 if (
                     abs(self.head[0] + self.head[1] - fruits[index].pos[0] + fruits[index].pos[1]) < 25
                     and not self.shield
@@ -330,9 +330,9 @@ class ChaimSnake(Snake):
                 if abs(self.head[0] + self.head[1] - fruits[index].pos[0] + fruits[index].pos[1]) < abs(
                     self.head[0] + self.head[1] - min_far.pos[0] + min_far.pos[1]
                 ):
-                    if fruits[index].kind["name"] == "KNIFE" and self.knife:
+                    if fruits[index].kind['name'] == 'KNIFE' and self.knife:
                         pass
-                    elif fruits[index].kind["name"] == "SHIELD" and self.shield:
+                    elif fruits[index].kind['name'] == 'SHIELD' and self.shield:
                         pass
                     else:
                         min_far = fruits[index]

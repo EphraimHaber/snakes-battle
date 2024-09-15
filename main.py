@@ -29,18 +29,18 @@ from snakes_battle.snakes_ai.yoav_snake import YoavSnake
 
 def main():
     ai_classes_available = [
-        {"class": Dumpster, "should_play": False},
+        {'class': Dumpster, 'should_play': False},
         # {"class": RandomSnake, "should_play": False},
-        {"class": YoavSnake, "should_play": False},
+        {'class': YoavSnake, 'should_play': False},
         # {"class": SimpleSnake, "should_play": False},
         # {"class": ManualSnake, "should_play": False},
         # {"class": ManualSnakeWASD, "should_play": False},
-        {"class": MoshesSnake, "should_play": False},
+        {'class': MoshesSnake, 'should_play': False},
         # {"class": WorstSnakeEU, "should_play": False},
-        {"class": ElitzSnake, "should_play": False},
-        {"class": ChaimSnake, "should_play": False},
-        {"class": AriSnake, "should_play": False},
-        {"class": Yakov, "should_play": False},
+        {'class': ElitzSnake, 'should_play': False},
+        {'class': ChaimSnake, 'should_play': False},
+        {'class': AriSnake, 'should_play': False},
+        {'class': Yakov, 'should_play': False},
     ]
 
     should_exit = False
@@ -52,22 +52,22 @@ def main():
 
     while should_exit == False:
         if game_running == True:
-            playing_classes = [x["class"] for x in ai_classes_available if x["should_play"] == True]
+            playing_classes = [x['class'] for x in ai_classes_available if x['should_play'] == True]
             if len(playing_classes) > 0:
                 run_num += 1
-                print(f"\n\n######################### Game Number {run_num} #########################\n")
+                print(f'\n\n######################### Game Number {run_num} #########################\n')
                 run_game(playing_classes, ai_classes_available)
-                print(f"\n#################################################################")
+                print(f'\n#################################################################')
 
             game_menus = True
             game_running = False
 
         elif game_menus == True:
             menus_return = run_menus(graphics, ai_classes_available)
-            if menus_return["action"] == "Exit":
+            if menus_return['action'] == 'Exit':
                 pygame.quit()
                 should_exit = True
-            elif menus_return["action"] == "Play":
+            elif menus_return['action'] == 'Play':
                 game_menus = False
                 game_running = True
 
@@ -82,18 +82,18 @@ def run_menus(graphics, ai_classes_available):
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
-                return "Exit"
+                return 'Exit'
             if event.type == pygame.KEYDOWN:
                 for index, class_dict in enumerate(ai_classes_available):
                     if event.key == settings.PYGAME_START_NUMBER_PRESS_VALUE + index:
-                        class_dict["should_play"] = not class_dict["should_play"]
+                        class_dict['should_play'] = not class_dict['should_play']
 
         if main_menu == True:
             menu_action = graphics.draw_menu(ai_classes_available, events)
-            if menu_action == "Exit":
-                return {"action": menu_action, "args": ""}
-            elif menu_action == "Play":
-                return {"action": menu_action, "args": ""}
+            if menu_action == 'Exit':
+                return {'action': menu_action, 'args': ''}
+            elif menu_action == 'Play':
+                return {'action': menu_action, 'args': ''}
 
         elif snake_picker == True:
             pass
@@ -134,9 +134,9 @@ def run_game(playing_classes, ai_classes_available):
                 should_exit = True
 
             if event.type == pygame.KEYDOWN:
-                if event.unicode == "+":
+                if event.unicode == '+':
                     frames_delay *= 0.9
-                if event.unicode == "-":
+                if event.unicode == '-':
                     frames_delay *= 1.1
 
         if should_exit == True:
@@ -152,7 +152,7 @@ def run_game(playing_classes, ai_classes_available):
                     new_direction = snake.make_decision(board.get_board_state())
 
             except Exception as e:
-                print(snake._name, "was removed from the game: ", e)
+                print(snake._name, 'was removed from the game: ', e)
                 snake._lost = True
 
                 if settings.DEBUG == True:
@@ -166,14 +166,14 @@ def run_game(playing_classes, ai_classes_available):
             else:
                 print(
                     snake._name,
-                    "was removed from the game: ",
-                    "snake not returned a valid direction",
-                    f"({new_direction})",
+                    'was removed from the game: ',
+                    'snake not returned a valid direction',
+                    f'({new_direction})',
                 )
                 snake._lost = True
 
                 if settings.DEBUG == True:
-                    raise InvalidDirection(f"Snake not returned a valid direction ({new_direction})")
+                    raise InvalidDirection(f'Snake not returned a valid direction ({new_direction})')
 
         for snake in board.snakes:
             snake._move_one_cell()
@@ -184,13 +184,13 @@ def run_game(playing_classes, ai_classes_available):
     winners = logic.get_first_place(board)
 
     if len(winners) == 1:
-        print(winners[0]._name + " is the winner!!!")
+        print(winners[0]._name + ' is the winner!!!')
 
     else:
-        print("There is a tie between", winners, "!!!")
+        print('There is a tie between', winners, '!!!')
 
     time.sleep(2)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

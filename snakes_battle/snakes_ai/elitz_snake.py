@@ -19,7 +19,7 @@ class ElitzSnake(Snake):
 
     def make_decision(self, board_state):
         min_distance = 100000
-        fruits = board_state["fruits"]
+        fruits = board_state['fruits']
         pos = self.body_position
         head = pos[0]
 

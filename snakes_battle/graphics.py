@@ -22,13 +22,13 @@ class GameGraphics:
         self.board_size = (board_width, board_height)
 
         self.borders = {
-            "left": [
+            'left': [
                 (0, 0),
                 (settings.BORDER_THICKNESS * self.cell_size - 1, 0),
                 (settings.BORDER_THICKNESS * self.cell_size - 1, self.board_size[1] * self.cell_size - 1),
                 (0, self.board_size[1] * self.cell_size - 1),
             ],
-            "right": [
+            'right': [
                 ((self.board_size[0] - settings.BORDER_THICKNESS) * self.cell_size - 1, 0),
                 (self.board_size[0] * self.cell_size - 1, 0),
                 (self.board_size[0] * self.cell_size - 1, self.board_size[1] * self.cell_size - 1),
@@ -37,13 +37,13 @@ class GameGraphics:
                     self.board_size[1] * self.cell_size - 1,
                 ),
             ],
-            "top": [
+            'top': [
                 (0, 0),
                 (self.board_size[0] * self.cell_size - 1, 0),
                 (self.board_size[0] * self.cell_size - 1, settings.BORDER_THICKNESS * self.cell_size - 1),
                 (0, settings.BORDER_THICKNESS * self.cell_size - 1),
             ],
-            "bottom": [
+            'bottom': [
                 (0, (self.board_size[1] - settings.BORDER_THICKNESS) * self.cell_size - 1),
                 (
                     self.board_size[0] * self.cell_size - 1,
@@ -57,14 +57,14 @@ class GameGraphics:
         self.images = {}
 
         for kind in FruitKind.fruits:
-            name = kind["name"]
-            image_path = kind["image"]
+            name = kind['name']
+            image_path = kind['image']
             image = self._load_and_scale_image(image_path)
             self.images[name] = image
 
         # Loads all snakes heads
         for snake_class_dict in ai_classes_available:
-            self.images[snake_class_dict["class"].__name__] = self._load_and_scale_image(
+            self.images[snake_class_dict['class'].__name__] = self._load_and_scale_image(
                 f"snakes_battle/images/snake_heads/{snake_class_dict['class'].__name__}.png",
                 fit_width=True,
                 fit_height=False,
@@ -73,9 +73,9 @@ class GameGraphics:
         # for color in settings.SNAKES_COLORS:
         #     self.images[f"HEAD_{str(color)}"] = self._load_and_scale_image(f"snakes_battle/images/snake_heads/snake_head{str(color)}.png", fit_width=True, fit_height=False)
 
-        self.title_font = pygame.font.SysFont("Arial Black", settings.SCOREBOARD_TITLE_FONT_SIZE)
-        self.subtitle_font = pygame.font.SysFont("Arial Black", 10)
-        self.score_font = pygame.font.SysFont("Arial Black", settings.SCOREBOARD_TEXT_FONT_SIZE)
+        self.title_font = pygame.font.SysFont('Arial Black', settings.SCOREBOARD_TITLE_FONT_SIZE)
+        self.subtitle_font = pygame.font.SysFont('Arial Black', 10)
+        self.score_font = pygame.font.SysFont('Arial Black', settings.SCOREBOARD_TEXT_FONT_SIZE)
 
         self.SCOREBOARD_STARTING_POSITION = (
             (self.board_size[0] + settings.SCOREBOARD_TITLE_TEXT_SEPARATION) * self.cell_size,
@@ -234,13 +234,13 @@ class GameGraphics:
                 # Drawing the king image in the snake
                 if i == 1 and snake._king:
                     if snake._direction == Direction.UP:
-                        rotated = pygame.transform.rotate(self.images["KING"], 180)
+                        rotated = pygame.transform.rotate(self.images['KING'], 180)
                     elif snake._direction == Direction.DOWN:
-                        rotated = pygame.transform.rotate(self.images["KING"], 0)
+                        rotated = pygame.transform.rotate(self.images['KING'], 0)
                     elif snake._direction == Direction.RIGHT:
-                        rotated = pygame.transform.rotate(self.images["KING"], 90)
+                        rotated = pygame.transform.rotate(self.images['KING'], 90)
                     else:
-                        rotated = pygame.transform.rotate(self.images["KING"], -90)
+                        rotated = pygame.transform.rotate(self.images['KING'], -90)
 
                     self.surface.blit(rotated, (coordinates[0][0] - margin, coordinates[0][1] - margin))
 
@@ -250,17 +250,17 @@ class GameGraphics:
 
             fruit_background = pygame.Surface((self.cell_size * 3, self.cell_size * 3))
             fruit_background.set_alpha(40)
-            fruit_background.fill(fruit.kind["color"])
+            fruit_background.fill(fruit.kind['color'])
 
             self.surface.blit(fruit_background, top_left)
 
-        self.surface.blit(self.images[fruit.kind["name"]], self._get_cell_coordinates(fruit.pos)[0])
+        self.surface.blit(self.images[fruit.kind['name']], self._get_cell_coordinates(fruit.pos)[0])
 
     def _draw_borders(self):
-        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders["left"])
-        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders["right"])
-        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders["top"])
-        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders["bottom"])
+        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders['left'])
+        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders['right'])
+        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders['top'])
+        pygame.draw.polygon(self.surface, settings.BORDER_COLOR, self.borders['bottom'])
 
     def _draw_background_lines(self):
         for column in range(self.board_size[0] - settings.BORDER_THICKNESS * 2 + 1):
@@ -293,11 +293,11 @@ class GameGraphics:
 
     def _draw_scoreboard(self, board):
         # Drawing title and subtitle
-        score_title_surface = self.title_font.render("Scoreboard:", False, (0, 0, 0))
+        score_title_surface = self.title_font.render('Scoreboard:', False, (0, 0, 0))
         score_subtitle_surface = self.subtitle_font.render(
             "aka the best game made by the best team alpha's scoreboard:", False, (0, 0, 0)
         )
-        time_left_surface = self.score_font.render(f"Time left: {board.game_time_left()}", False, (0, 0, 0))
+        time_left_surface = self.score_font.render(f'Time left: {board.game_time_left()}', False, (0, 0, 0))
         self.surface.blit(score_title_surface, self.SCOREBOARD_STARTING_POSITION)
         self.surface.blit(
             score_subtitle_surface, (self.SCOREBOARD_STARTING_POSITION[0], self.SCOREBOARD_STARTING_POSITION[1] + 60)
@@ -314,7 +314,7 @@ class GameGraphics:
                 + (i + 2) * self.cell_size * settings.SCOREBOARD_TITLE_SCORE_SEPARATION,
             )
             score_text_surface = self.score_font.render(
-                f"{snake._name} (v{snake._version}): {snake._length}", False, snake._color
+                f'{snake._name} (v{snake._version}): {snake._length}', False, snake._color
             )
             self.surface.blit(score_text_surface, score_position)
 
@@ -326,7 +326,7 @@ class GameGraphics:
             separator_count = 0  # How many powerups are displayed
             if snake._shield == True:
                 self.surface.blit(
-                    self.images["SHIELD"],
+                    self.images['SHIELD'],
                     [
                         score_position[0]
                         + (settings.SCOREBOARD_SCORE_POWERUPS_SEPARATOR + separator_count) * self.cell_size,
@@ -336,7 +336,7 @@ class GameGraphics:
                 separator_count += 1
             if snake._king == True:
                 self.surface.blit(
-                    self.images["KING"],
+                    self.images['KING'],
                     [
                         score_position[0]
                         + (settings.SCOREBOARD_SCORE_POWERUPS_SEPARATOR + separator_count) * self.cell_size,
@@ -346,7 +346,7 @@ class GameGraphics:
                 separator_count += 1
             if snake._knife == True:
                 self.surface.blit(
-                    self.images["KNIFE"],
+                    self.images['KNIFE'],
                     [
                         score_position[0]
                         + (settings.SCOREBOARD_SCORE_POWERUPS_SEPARATOR + separator_count) * self.cell_size,
@@ -436,12 +436,12 @@ class GameGraphics:
         )
 
         random_play_button = Button(
-            buttons_start_position[0], buttons_start_position[1], "Play", self.score_font, self.surface
+            buttons_start_position[0], buttons_start_position[1], 'Play', self.score_font, self.surface
         )
         exit_button = Button(
             buttons_start_position[0] + (settings.BUTTONS_WIDTH + settings.BUTTONS_SPACING) * 1,
             buttons_start_position[1],
-            "Exit",
+            'Exit',
             self.score_font,
             self.surface,
         )
@@ -455,7 +455,7 @@ class GameGraphics:
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    return "Play"
+                    return 'Play'
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 for button in buttons_list:
@@ -464,17 +464,17 @@ class GameGraphics:
 
         # Displaying the available classes to play
         class_picker_header_text = self.score_font.render(
-            "Choose classes to play (Toggle number)", False, (255, 255, 255)
+            'Choose classes to play (Toggle number)', False, (255, 255, 255)
         )
         self.surface.blit(class_picker_header_text, (settings.CLASS_NAME_START_X, settings.CLASS_NAME_START_Y))
         for index, class_dict in enumerate(ai_classes_available):
-            if class_dict["should_play"] == True:
+            if class_dict['should_play'] == True:
                 text_color = (0, 255, 0)
             else:
                 text_color = (255, 0, 0)
 
             text_surface = self.score_font.render(
-                str(index + 1) + "   -   " + class_dict["class"].__name__, False, text_color
+                str(index + 1) + '   -   ' + class_dict['class'].__name__, False, text_color
             )
             self.surface.blit(
                 text_surface,

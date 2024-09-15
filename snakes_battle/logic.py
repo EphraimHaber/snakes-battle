@@ -156,9 +156,9 @@ def apply_logic(board, events):
             else:
                 print(
                     snake._name,
-                    "was removed from the game: ",
-                    "snake not returned a valid direction",
-                    f"({new_direction})",
+                    'was removed from the game: ',
+                    'snake not returned a valid direction',
+                    f'({new_direction})',
                 )
                 snake._lost = True
 
@@ -175,7 +175,7 @@ def apply_logic(board, events):
 
     # Creates randomly created fruits in their creation_probability.
     for randomly_created_fruit in FruitKind.randomly_created:
-        if random.random() < randomly_created_fruit["creation_probability"]:
+        if random.random() < randomly_created_fruit['creation_probability']:
             if randomly_created_fruit == FruitKind.KING:
                 if board.is_there_a_king:
                     continue
@@ -191,11 +191,11 @@ def snake_eats(snake, fruit):
 
     # If the snake is a king so every fruit the snake eats, the snake grows in 'FruitKind.KING["fruits_score"]' units. even bomb.
     if snake._king:
-        snake._grow(FruitKind.KING["fruits_score"])
+        snake._grow(FruitKind.KING['fruits_score'])
         return
 
     if fruit.kind in FruitKind.beneficial_fruits:  # Snake ate a beneficial fruit
-        snake._grow(fruit.kind["score"])
+        snake._grow(fruit.kind['score'])
 
     elif fruit.kind in FruitKind.harmful_fruits:  # Snake ate an harmful fruit
         if snake._shield or snake._king:
@@ -203,7 +203,7 @@ def snake_eats(snake, fruit):
             return
 
         if fruit.kind == FruitKind.BOMB:
-            snake._shrink(-fruit.kind["score"])
+            snake._shrink(-fruit.kind['score'])
 
         elif fruit.kind == FruitKind.SKULL:
             snake._shrink(snake._length)
@@ -219,7 +219,7 @@ def snake_eats(snake, fruit):
             snake._knife = False
             snake._shield = False
             snake._king = True
-            snake._king_remaining_time = FruitKind.KING["effection_duration"]
+            snake._king_remaining_time = FruitKind.KING['effection_duration']
 
 
 def remove_snake(snake, board):

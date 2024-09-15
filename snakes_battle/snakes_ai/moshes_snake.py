@@ -12,7 +12,7 @@ class MoshesSnake(Snake):
         self.border_cells = borders_cells
 
     def make_decision(self, board_state):
-        fruits = board_state["fruits"]
+        fruits = board_state['fruits']
         pos = self.body_position
 
         current_x, current_y = pos[0]
@@ -32,12 +32,12 @@ class MoshesSnake(Snake):
             distance = abs(current_x - fruit_x) + abs(current_y - fruit_y)
             if distance < min_dist:
                 # and ((fruit.lifespan > distance))
-                if fruit.kind["name"] != "STRAWBERRY" and fruit.kind["name"] != "DRAGON_FRUIT":
+                if fruit.kind['name'] != 'STRAWBERRY' and fruit.kind['name'] != 'DRAGON_FRUIT':
                     if fruit.lifespan > distance:
                         continue
                 min_dist = distance
                 closest_fruit = fruit
-                if fruit.kind["name"] == "KING":
+                if fruit.kind['name'] == 'KING':
                     break
 
         new_direction = Direction.CONTINUE
@@ -166,7 +166,7 @@ class MoshesSnake(Snake):
         elif self.direction == Direction.LEFT:
             not_available_directions.append(Direction.RIGHT)
 
-        for fruit in board_state["fruits"]:
+        for fruit in board_state['fruits']:
             if fruit.kind in FruitKind.harmful_fruits:
                 if fruit.pos == [head_x + i, head_y]:
                     if Direction.RIGHT not in not_available_directions:
@@ -181,7 +181,7 @@ class MoshesSnake(Snake):
                     if Direction.UP not in not_available_directions:
                         not_available_directions.append(Direction.UP)
 
-        for snake in board_state["snakes"]:
+        for snake in board_state['snakes']:
             snake_pos = snake.body_position
             for cell in snake_pos:
                 if cell == [head_x + i, head_y]:

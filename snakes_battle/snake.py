@@ -22,7 +22,7 @@ class Snake:
         self._lived_x_frames = 0  # Number of frames the snake lived.
 
         self._body_position = None
-        self._version = "0.0"
+        self._version = '0.0'
 
         # All the special fruits that can be active in this snake.
         self._shield = False
@@ -193,4 +193,4 @@ class Snake:
         self._body_position = self._body_position[: self._length]
 
     def __repr__(self) -> str:
-        return f"{self._name}"
+        return f'{self._name}'
