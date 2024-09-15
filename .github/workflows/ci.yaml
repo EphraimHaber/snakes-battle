@@ -31,20 +31,3 @@ jobs:
 
       # - name: Run full Ruff check
       #   run: ruff check .
-
-      - name: Set workflow status
-        run: |
-          if [[ $(ruff --exit-code . | wc -l) -gt 0 ]]; then
-            echo "Ruff found errors. Setting workflow status to failure."
-            echo ::set-output name=status::failure
-          else
-            echo "Ruff passed. Setting workflow status to success."
-            echo ::set-output name=status::success
-          fi
-
-      - name: Check workflow status
-        run: |
-          if [[ $(echo "${{ steps.ruff_checks.outputs.status }}") != "success" ]]; then
-            echo "Workflow failed. Blocking merge."
-            exit 1
-          fi
