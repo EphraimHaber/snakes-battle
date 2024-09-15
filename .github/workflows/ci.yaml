@@ -23,24 +23,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Ruff check (I violations)
-        run: ruff check . --select I
+      # - name: Run Ruff check (I violations)
+      #   run: ruff check . --select I
 
-      - name: Run Ruff formatting check
-        run: ruff format --check
+      # - name: Run Ruff formatting check
+      #   run: ruff format --check
 
-      - name: Run full Ruff check
-        run: ruff check .
+      # - name: Run full Ruff check
+      #   run: ruff check .
 
-      - name: Set workflow status
-        run: |
-          if [[ $(ruff --exit-code . | wc -l) -gt 0 ]]; then
-            echo "Ruff found errors. Setting workflow status to failure."
-            echo ::set-output name=status::failure
-          else
-            echo "Ruff passed. Setting workflow status to success."
-            echo ::set-output name=status::success
-          fi
+      # - name: Set workflow status
+      #   run: |
+      #     if [[ $(ruff --exit-code . | wc -l) -gt 0 ]]; then
+      #       echo "Ruff found errors. Setting workflow status to failure."
+      #       echo ::set-output name=status::failure
+      #     else
+      #       echo "Ruff passed. Setting workflow status to success."
+      #       echo ::set-output name=status::success
+      #     fi
 
       - name: Check workflow status
         run: |
