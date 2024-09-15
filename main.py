@@ -14,8 +14,6 @@ from snakes_battle.snakes_ai.simple_snake import SimpleSnake
 from snakes_battle.snakes_ai.moshes_snake import MoshesSnake
 from snakes_battle.snakes_ai.manual_control_snake import ManualSnake
 from snakes_battle.snakes_ai.manual_control_snake_wasd import ManualSnakeWASD
-from snakes_battle.snakes_ai.snakysnake import SnakySnake
-from snakes_battle.snakes_ai.worstSnakeEU import WorstSnakeEU
 from snakes_battle.snakes_ai.dumpster import Dumpster
 from snakes_battle.snakes_ai.yoav_snake import YoavSnake
 from snakes_battle.snakes_ai.elitz_snake import ElitzSnake
@@ -37,9 +35,8 @@ def main():
         # {"class": ManualSnake, "should_play": False},
         # {"class": ManualSnakeWASD, "should_play": False},
         {"class": MoshesSnake, "should_play": False},
-        {"class": SnakySnake, "should_play": False},
         # {"class": WorstSnakeEU, "should_play": False},
-        {"class": ElitzSnake , "should_play": False},
+        {"class": ElitzSnake, "should_play": False},
         {"class": ChaimSnake, "should_play": False},
         {"class": AriSnake, "should_play": False},
         {"class": Yakov, "should_play": False},
@@ -54,25 +51,22 @@ def main():
 
     while should_exit == False:
         if game_running == True:
-            playing_classes = [x['class']
-                               for x in ai_classes_available if x["should_play"] == True]
+            playing_classes = [x["class"] for x in ai_classes_available if x["should_play"] == True]
             if len(playing_classes) > 0:
                 run_num += 1
-                print(
-                    f"\n\n######################### Game Number {run_num} #########################\n")
+                print(f"\n\n######################### Game Number {run_num} #########################\n")
                 run_game(playing_classes, ai_classes_available)
-                print(
-                    f"\n#################################################################")
+                print(f"\n#################################################################")
 
             game_menus = True
             game_running = False
 
         elif game_menus == True:
             menus_return = run_menus(graphics, ai_classes_available)
-            if menus_return['action'] == "Exit":
+            if menus_return["action"] == "Exit":
                 pygame.quit()
                 should_exit = True
-            elif menus_return['action'] == "Play":
+            elif menus_return["action"] == "Play":
                 game_menus = False
                 game_running = True
 
@@ -91,13 +85,13 @@ def run_menus(graphics, ai_classes_available):
             if event.type == pygame.KEYDOWN:
                 for index, class_dict in enumerate(ai_classes_available):
                     if event.key == settings.PYGAME_START_NUMBER_PRESS_VALUE + index:
-                        class_dict['should_play'] = not class_dict['should_play']
+                        class_dict["should_play"] = not class_dict["should_play"]
 
         if main_menu == True:
             menu_action = graphics.draw_menu(ai_classes_available, events)
-            if menu_action == 'Exit':
+            if menu_action == "Exit":
                 return {"action": menu_action, "args": ""}
-            elif menu_action == 'Play':
+            elif menu_action == "Play":
                 return {"action": menu_action, "args": ""}
 
         elif snake_picker == True:
@@ -105,7 +99,6 @@ def run_menus(graphics, ai_classes_available):
 
 
 def run_game(playing_classes, ai_classes_available):
-
     graphics = GameGraphics(ai_classes_available)
     board = Board(graphics.board_size)
 
@@ -114,8 +107,9 @@ def run_game(playing_classes, ai_classes_available):
     snakes_array = []
 
     for snake_class in playing_classes:
-        snakes_array.append(snake_class(
-            board.border_cells, color=graphics.get_unique_snake_color(), name=snake_class.__name__))
+        snakes_array.append(
+            snake_class(board.border_cells, color=graphics.get_unique_snake_color(), name=snake_class.__name__)
+        )
 
     for snake in snakes_array:
         # The position of the head is determined by the rules and the board state.
@@ -127,8 +121,7 @@ def run_game(playing_classes, ai_classes_available):
         board.add_snake(snake)
 
     for _ in range(settings.NUMBER_OF_BENEFICIAL_FRUITS_ON_BOARD):
-        board.add_fruit(Fruit(choice(FruitKind.beneficial_fruits),
-                        logic.get_new_fruit_position(board)))
+        board.add_fruit(Fruit(choice(FruitKind.beneficial_fruits), logic.get_new_fruit_position(board)))
 
     while not board.is_game_timed_out() and len(board.snakes) > 0:
         time.sleep(frames_delay)
@@ -151,34 +144,35 @@ def run_game(playing_classes, ai_classes_available):
         # The AI Snake Should make a decision in which direction to go.
         for snake in board.snakes:
             try:
-
                 if snake.__class__ in [ManualSnake, ManualSnakeWASD]:
-                    new_direction = snake.make_decision(
-                        board.get_board_state(), events)
+                    new_direction = snake.make_decision(board.get_board_state(), events)
 
                 else:
-                    new_direction = snake.make_decision(
-                        board.get_board_state())
+                    new_direction = snake.make_decision(board.get_board_state())
 
             except Exception as e:
                 print(snake._name, "was removed from the game: ", e)
                 snake._lost = True
-                
+
                 if settings.DEBUG == True:
                     raise e
-                    
+
                 continue
 
             if new_direction in [0, 1, 2, 3, 4, None]:
                 snake._change_direction(new_direction)
 
             else:
-                print(snake._name, "was removed from the game: ",
-                      "snake not returned a valid direction", f"({new_direction})")
+                print(
+                    snake._name,
+                    "was removed from the game: ",
+                    "snake not returned a valid direction",
+                    f"({new_direction})",
+                )
                 snake._lost = True
 
                 if settings.DEBUG == True:
-                    raise InvalidDirection(f'Snake not returned a valid direction ({new_direction})')
+                    raise InvalidDirection(f"Snake not returned a valid direction ({new_direction})")
 
         for snake in board.snakes:
             snake._move_one_cell()

@@ -54,27 +54,26 @@ class YoavSnake(Snake):
         return False
 
     def get_next_fruit(self, fruits):
-        filtered = [x for x in fruits if x.kind not in FruitKind.harmful_fruits] # No harmful fruits
+        filtered = [x for x in fruits if x.kind not in FruitKind.harmful_fruits]  # No harmful fruits
         closest = self.closest(filtered)
         return closest
-            
 
     def do_this_move(self, board_state):
         up, down, right, left = self.directions
-        if (self.no_problem_found(board_state, up)):
+        if self.no_problem_found(board_state, up):
             return Direction.UP
-        if (self.no_problem_found(board_state, down)):
+        if self.no_problem_found(board_state, down):
             return Direction.DOWN
-        if (self.no_problem_found(board_state, right)):
+        if self.no_problem_found(board_state, right):
             return Direction.RIGHT
-        if (self.no_problem_found(board_state, left)):
+        if self.no_problem_found(board_state, left):
             return Direction.LEFT
         return Direction.CONTINUE
 
     def no_problem_found(self, board_state, cmd):
         fruits = board_state["fruits"]
         snakes = board_state["snakes"]
-        if (self.is_harmful(fruits, cmd) or self.is_snake(snakes, cmd) or self.is_border(cmd)):
+        if self.is_harmful(fruits, cmd) or self.is_snake(snakes, cmd) or self.is_border(cmd):
             return False
         return True
 
@@ -86,44 +85,43 @@ class YoavSnake(Snake):
 
         if head[0] > fruit.pos[0]:
             if self.direction == Direction.RIGHT:
-                if (self.no_problem_found(board_state, up)):
+                if self.no_problem_found(board_state, up):
                     return Direction.UP
-                elif (self.no_problem_found(board_state, down)):
+                elif self.no_problem_found(board_state, down):
                     return Direction.DOWN
             else:
-                if (self.no_problem_found(board_state, left)):
+                if self.no_problem_found(board_state, left):
                     return Direction.LEFT
 
         if head[0] < fruit.pos[0]:
             if self.direction == Direction.LEFT:
-                if (self.no_problem_found(board_state, up)):
+                if self.no_problem_found(board_state, up):
                     return Direction.UP
-                elif (self.no_problem_found(board_state, down)):
+                elif self.no_problem_found(board_state, down):
                     return Direction.DOWN
             else:
-                if (self.no_problem_found(board_state, right)):
+                if self.no_problem_found(board_state, right):
                     return Direction.RIGHT
 
         if head[0] == fruit.pos[0]:
-
             if head[1] < fruit.pos[1]:
                 if self.direction == Direction.UP:
-                    if (self.no_problem_found(board_state, right)):
+                    if self.no_problem_found(board_state, right):
                         return Direction.RIGHT
-                    elif (self.no_problem_found(board_state, left)):
+                    elif self.no_problem_found(board_state, left):
                         return Direction.LEFT
                 else:
-                    if (self.no_problem_found(board_state, down)):
+                    if self.no_problem_found(board_state, down):
                         return Direction.DOWN
 
             if head[1] > fruit.pos[1]:
                 if self.direction == Direction.DOWN:
-                    if (self.no_problem_found(board_state, right)):
+                    if self.no_problem_found(board_state, right):
                         return Direction.RIGHT
-                    elif (self.no_problem_found(board_state, left)):
+                    elif self.no_problem_found(board_state, left):
                         return Direction.LEFT
                 else:
-                    if (self.no_problem_found(board_state, up)):
+                    if self.no_problem_found(board_state, up):
                         return Direction.UP
 
         return self.do_this_move(board_state)

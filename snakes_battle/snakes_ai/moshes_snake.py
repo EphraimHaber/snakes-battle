@@ -29,29 +29,27 @@ class MoshesSnake(Snake):
                     closest_fruit = fruit
 
             distance = abs(current_x - fruit_x) + abs(current_y - fruit_y)
-            if (distance < min_dist):
+            if distance < min_dist:
                 # and ((fruit.lifespan > distance))
-                if fruit.kind['name'] != "STRAWBERRY" and fruit.kind['name'] != "DRAGON_FRUIT":
+                if fruit.kind["name"] != "STRAWBERRY" and fruit.kind["name"] != "DRAGON_FRUIT":
                     if fruit.lifespan > distance:
                         continue
                 min_dist = distance
                 closest_fruit = fruit
-                if fruit.kind['name'] == "KING":
+                if fruit.kind["name"] == "KING":
                     break
 
         new_direction = Direction.CONTINUE
         not_available_directions = self.check_next_step(board_state, 1)
         # not_available_directions3 = self.check_next_step(board_state, 3)
-        available_directions = [Direction.DOWN,
-                                Direction.UP, Direction.LEFT, Direction.RIGHT]
-        available_directions = list(
-            set(available_directions) - set(not_available_directions))
+        available_directions = [Direction.DOWN, Direction.UP, Direction.LEFT, Direction.RIGHT]
+        available_directions = list(set(available_directions) - set(not_available_directions))
 
         if len(available_directions) == 0:
             return Direction.CONTINUE
 
         # First chance
-        ############################    
+        ############################
         if current_x > closest_fruit.pos[0]:
             if self.direction == Direction.RIGHT:
                 if Direction.UP in available_directions:
@@ -71,7 +69,6 @@ class MoshesSnake(Snake):
                 new_direction = Direction.RIGHT
 
         elif current_x == closest_fruit.pos[0]:
-
             if current_y < closest_fruit.pos[1]:
                 if self.direction == Direction.UP:
                     if Direction.RIGHT in available_directions:
@@ -96,7 +93,7 @@ class MoshesSnake(Snake):
                 else:
                     new_direction = Direction.UP
         ############################
-        
+
         # Second chance
         ############################
         # if current_x > closest_fruit.pos[0]:
@@ -146,7 +143,6 @@ class MoshesSnake(Snake):
         ############################
 
         if new_direction in available_directions:
-
             return new_direction
         else:
             if Direction.CONTINUE in available_directions:
@@ -214,7 +210,6 @@ class MoshesSnake(Snake):
             #         elif cell == [head_x, head_y - i -1]:
             #             if Direction.UP not in not_available_directions:
             #                 not_available_directions.append(Direction.UP)
-
 
         for cell in self.border_cells:
             if head_x + i >= 39:

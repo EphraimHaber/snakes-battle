@@ -1,5 +1,3 @@
-
-
 from snakes_battle.snake import Snake, Direction
 
 
@@ -11,7 +9,6 @@ class SimpleSnake(Snake):
         self.border_cells = borders_cells
 
     def make_decision(self, board_state):
-        
         fruits = board_state["fruits"]
         snakes = board_state["snakes"]
         pos = self.body_position
@@ -28,7 +25,6 @@ class SimpleSnake(Snake):
                 return Direction.RIGHT
 
         if pos[0][0] == fruits[0].pos[0]:
-
             if pos[0][1] < fruits[0].pos[1]:
                 if self.direction == Direction.UP:
                     return Direction.RIGHT

@@ -32,13 +32,13 @@ class Dumpster(Snake):
         boarder_cell_list = [list(elem) for elem in self.border_cells]
         skull_pos = [-11, -11]
         for fruit in fruits:
-            if fruit.kind['name'] == 'SKULL':
+            if fruit.kind["name"] == "SKULL":
                 skull_pos[0] = fruit.pos[0]
                 skull_pos[1] = fruit.pos[1]
 
-        beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ["STRAWBERRY", "DRAGON_FRUIT"]]
+        beneficial_fruits = [fruit for fruit in fruits if fruit.kind["name"] in ["STRAWBERRY", "DRAGON_FRUIT"]]
         beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
-        harmful_fruits = [fruit for fruit in fruits if fruit.kind['name'] == "BOMB"]
+        harmful_fruits = [fruit for fruit in fruits if fruit.kind["name"] == "BOMB"]
         harmful_fruits_pos = [fruit.pos for fruit in harmful_fruits]
 
         available_directions = [Direction.UP, Direction.RIGHT, Direction.DOWN, Direction.LEFT]
@@ -92,26 +92,27 @@ class Dumpster(Snake):
                         available_directions.remove(Direction.DOWN)
         target = self.get_target(board_state, available_directions)
         ally_destination = target
-        ally_distance_to_fruit = [abs(head[0] - fruit_pos[0]) + abs(head[1] - fruit_pos[1]) for fruit_pos in
-                                  beneficial_fruits_pos]
+        ally_distance_to_fruit = [
+            abs(head[0] - fruit_pos[0]) + abs(head[1] - fruit_pos[1]) for fruit_pos in beneficial_fruits_pos
+        ]
 
         # ally_destination = beneficial_fruits_pos[np.argmin(ally_distance_to_fruit)]  # todo abort if closest to enemy
         # todo combat tactics and target selection:
         # todo trap near food when length 14, 3 way block a fruit (only non-special fruits)
-        '''
+        """
         6- 5|x| 1-14 
         7- 4-3-2-13
         8-9-10-11-12
-        '''
+        """
         # todo attack if have knife, crown, only I have shield or both no shields but I have bigger length
         # todo grow by eating fruit - find closest fruit to enemy and self, if fruit closer to self, go.
         # todo if fruit closer to enemy - find one closer to self. if none exist, go to furthest away from enemy
-        '''
+        """
         if fruit closest to enemy is closer to ally, set destination to that fruit. 
         if fruit closest to ally is closer to enemy, go for the max distance fruit from enemy.
         if one closer to ally and one closer to enemy, go to closer to ally
         if enemy has knife, go to furthermost fruit until can reach shield or crown, then sprint there. 
-        '''
+        """
         # special_items = [fruit for fruit in fruits if fruit.kind['name'] in ["SHIELD", "KING", "KNIFE"]]
         #
         # shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == "SHIELD"]
@@ -180,7 +181,7 @@ class Dumpster(Snake):
             "up": [head[0], head[1] - 1],
             "down": [head[0], head[1] + 1],
             "right": [head[0] + 1, head[1]],
-            "left": [head[0] - 1, head[1]]
+            "left": [head[0] - 1, head[1]],
         }
         if head[0] < ally_destination[0]:
             if Direction.RIGHT in available_directions:
@@ -216,10 +217,12 @@ class Dumpster(Snake):
                 keys = possible_steps.keys()
                 for k in keys:
                     option = possible_steps[k]
-                    if option not in harmful_fruits_pos \
-                            and option not in boarder_cell_list \
-                            and option != skull_pos \
-                            and option not in [snake.body_position[0:] for snake in snakes]:
+                    if (
+                        option not in harmful_fruits_pos
+                        and option not in boarder_cell_list
+                        and option != skull_pos
+                        and option not in [snake.body_position[0:] for snake in snakes]
+                    ):
                         return direction_dict_decision_key[k.upper()]
         return decision
 
@@ -228,7 +231,7 @@ class Dumpster(Snake):
         snakes = board_state["snakes"]
         head = self.head
         is_alone_on_board = len(snakes) == 1
-        beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ["STRAWBERRY", "DRAGON_FRUIT"]]
+        beneficial_fruits = [fruit for fruit in fruits if fruit.kind["name"] in ["STRAWBERRY", "DRAGON_FRUIT"]]
         beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
         if is_alone_on_board:
             ally_distance_to_fruit = get_distances_to_fruit(head, beneficial_fruits_pos)
@@ -254,16 +257,16 @@ class Dumpster(Snake):
             ally_destination = enemy_destination
 
         enemy_target_bank = []
-        special_items = [fruit for fruit in fruits if fruit.kind['name'] in ["SHIELD", "KING", "KNIFE"]]
+        special_items = [fruit for fruit in fruits if fruit.kind["name"] in ["SHIELD", "KING", "KNIFE"]]
 
-        shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == "SHIELD"]
-        shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == "SHIELD"]
+        shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "SHIELD"]
+        shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "SHIELD"]
 
-        king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == "KING"]
-        king_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == "KING"]
+        king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "KING"]
+        king_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "KING"]
 
-        knife_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == "KNIFE"]
-        knife_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == "KNIFE"]
+        knife_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind["name"] == "KNIFE"]
+        knife_pos_list = [fruit.pos for fruit in special_items if fruit.kind["name"] == "KNIFE"]
         if not self.king and len(snakes) > 1:
             if len(king_pos_list) >= 1:
                 for i in range(len(king_pos_list)):
@@ -304,4 +307,6 @@ class Dumpster(Snake):
 
     def is_can_get_there_before_enemy(self, enemy_head, pos):
         head = self.head
-        return abs(head[0] - pos[0]) + abs(head[1] - pos[1]) < abs(enemy_head[0] - pos[0]) + abs(enemy_head[1] - pos[1])
+        return abs(head[0] - pos[0]) + abs(head[1] - pos[1]) < abs(enemy_head[0] - pos[0]) + abs(
+            enemy_head[1] - pos[1]
+        )

@@ -1,6 +1,7 @@
 import pygame
 from snakes_battle.snake import Snake, Direction
 
+
 class ManualSnakeWASD(Snake):
     def __init__(self, borders_cells, color, name) -> None:
         super().__init__(color, name)
@@ -19,5 +20,5 @@ class ManualSnakeWASD(Snake):
                     return Direction.UP
                 elif event.key == pygame.K_s:
                     return Direction.DOWN
-        
+
         return Direction.CONTINUE

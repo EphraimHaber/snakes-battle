@@ -62,26 +62,25 @@ class AriSnake(Snake):
 
                 target = fruit.pos
                 break
-                
+
             for fruit in not_harmful_fruits:
                 if not self.shield:
                     if fruit.kind == FruitKind.SHIELD:
                         target = fruit.pos
                         break
-            
+
             for fruit in not_harmful_fruits:
                 if not self.knife and enemy_snakes:
                     if self.length > enemy_snakes[0].length and not enemy_snakes[0].knife:
                         if fruit.kind == FruitKind.KNIFE:
                             target = fruit.pos
                             break
-            
+
             for fruit in not_harmful_fruits:
                 if fruit.kind == FruitKind.KING:
                     target = fruit.pos
                     break
-                    
-                
+
             if enemy_snakes:
                 closest_enemy = enemy_snakes[0]
                 len_enemy = closest_enemy.length
@@ -95,7 +94,7 @@ class AriSnake(Snake):
                     if len_enemy >= self.length:
                         if len_enemy >= 6:
                             target = closest_enemy.body_position[2]
-                    elif not (closest_enemy.king or closest_enemy.knife) :
+                    elif not (closest_enemy.king or closest_enemy.knife):
                         target = closest_enemy.head
 
             if pos[0][0] > target[0]:
@@ -132,7 +131,6 @@ class AriSnake(Snake):
                         return Direction.LEFT
 
             if pos[0][0] == target[0]:
-
                 if pos[0][1] < target[1]:
                     if self._direction == Direction.UP:
                         if self.is_right(board_state):
@@ -235,33 +233,17 @@ class AriSnake(Snake):
             Direction.RIGHT: [x_head + 1, y_head],
             Direction.LEFT: [x_head - 1, y_head],
             Direction.UP: [x_head, y_head - 1],
-            Direction.DOWN: [x_head, y_head + 1]
+            Direction.DOWN: [x_head, y_head + 1],
         }
 
         next_pos = mapping_pos[direction]
 
         mapping_bad_pos = {
-            Direction.RIGHT: [next_pos,
-                              [x_head + 2, y_head],
-                              [x_head + 1, y_head + 1],
-                              [x_head + 1, y_head - 1]],
-
-            Direction.LEFT:  [next_pos,
-                              [x_head - 2, y_head],
-                              [x_head - 1, y_head + 1],
-                              [x_head - 1, y_head - 1]],
-
-            Direction.UP: [next_pos,
-                           [x_head, y_head - 2],
-                           [x_head - 1, y_head - 1],
-                           [x_head + 1, y_head - 1]],
-
-            Direction.DOWN: [next_pos,
-                             [x_head, y_head + 2],
-                             [x_head - 1, y_head + 1],
-                             [x_head + 1, y_head + 1]]
+            Direction.RIGHT: [next_pos, [x_head + 2, y_head], [x_head + 1, y_head + 1], [x_head + 1, y_head - 1]],
+            Direction.LEFT: [next_pos, [x_head - 2, y_head], [x_head - 1, y_head + 1], [x_head - 1, y_head - 1]],
+            Direction.UP: [next_pos, [x_head, y_head - 2], [x_head - 1, y_head - 1], [x_head + 1, y_head - 1]],
+            Direction.DOWN: [next_pos, [x_head, y_head + 2], [x_head - 1, y_head + 1], [x_head + 1, y_head + 1]],
         }
-
 
         bad_pos = mapping_bad_pos[direction]
         if tuple(next_pos) in self.border_cells:
@@ -278,7 +260,7 @@ class AriSnake(Snake):
                         if bad == snake.head:
                             return False
 
-            if (self.knife == False and self.king == False ) or (self.knife and self.length > enemy_snakes[0].length):
+            if (self.knife == False and self.king == False) or (self.knife and self.length > enemy_snakes[0].length):
                 for snake in enemy_snakes:
                     if next_pos in snake.body_position[1:]:
                         return False
@@ -305,4 +287,4 @@ class AriSnake(Snake):
         x_steps = abs(self.head[0] - pos_fruit[0])
         y_steps = abs(self.head[1] - pos_fruit[1])
 
-        return x_steps+y_steps <= fruit.lifespan
+        return x_steps + y_steps <= fruit.lifespan

@@ -8,7 +8,6 @@ from snakes_battle.snake import Snake
 
 class Board:
     def __init__(self, board_size) -> None:
-
         self.board_size = board_size
         self.snakes = []
         self.lost_snakes = []
@@ -24,12 +23,17 @@ class Board:
         # Initializing the 'border_cells' list.
         for x in range(self.board_size[0]):
             for y in range(self.board_size[1]):
-                if x < settings.BORDER_THICKNESS or x >= self.board_size[0] - settings.BORDER_THICKNESS or y < settings.BORDER_THICKNESS or y >= board_size[1] - settings.BORDER_THICKNESS:
+                if (
+                    x < settings.BORDER_THICKNESS
+                    or x >= self.board_size[0] - settings.BORDER_THICKNESS
+                    or y < settings.BORDER_THICKNESS
+                    or y >= board_size[1] - settings.BORDER_THICKNESS
+                ):
                     self.border_cells.append((x, y))
 
         # Initializing the 'all_cells_pos' with all the cells on the board except the borders cells.
-        for x in range(settings.BORDER_THICKNESS, self.board_size[0]-settings.BORDER_THICKNESS-1):
-            for y in range(settings.BORDER_THICKNESS, self.board_size[1]-settings.BORDER_THICKNESS-1):
+        for x in range(settings.BORDER_THICKNESS, self.board_size[0] - settings.BORDER_THICKNESS - 1):
+            for y in range(settings.BORDER_THICKNESS, self.board_size[1] - settings.BORDER_THICKNESS - 1):
                 self.all_cells_pos.append((x, y))
 
     def update_empty_cells(self):
@@ -71,10 +75,7 @@ class Board:
 
             snakes_copy.append(snake)
 
-        return {
-            "snakes": snakes_copy,
-            "fruits": copy.deepcopy(self.fruits)
-        }
+        return {"snakes": snakes_copy, "fruits": copy.deepcopy(self.fruits)}
 
     def total_game_time(self):
         return time.time() - self.start_time

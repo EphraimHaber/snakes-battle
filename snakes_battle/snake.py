@@ -11,17 +11,15 @@ class Direction:
 
 
 class Snake:
-
     def __init__(self, color, name) -> None:
-
         self._name = name
         self._color = color
 
         # Only 4 directions - will pick one of them
         self._direction = randint(0, 3)
         self._length = 1
-        self._lost = False # If True, snake will be removed from game
-        self._lived_x_frames = 0 # Number of frames the snake lived.
+        self._lost = False  # If True, snake will be removed from game
+        self._lived_x_frames = 0  # Number of frames the snake lived.
 
         self._body_position = None
         self._version = "0.0"
@@ -51,10 +49,10 @@ class Snake:
     @property
     def head(self):
         return copy.copy(self._body_position[0])
-    
+
     @head.setter
     def head(self, value):
-        pass # Player can't change head value
+        pass  # Player can't change head value
 
     @property
     def direction(self):
@@ -112,38 +110,37 @@ class Snake:
             tail_x, tail_y = self._body_position[-1]
 
             if self._length > 1:
-
                 tail_neighbor_x, tail_neighbor_y = self._body_position[-2]
 
                 # Adding the new cell above the tail cell.
                 if tail_y < tail_neighbor_y:
-                    self._body_position.append([tail_x, tail_y-1])
+                    self._body_position.append([tail_x, tail_y - 1])
 
                 # Adding the new cell under the tail cell.
                 elif tail_y > tail_neighbor_y:
-                    self._body_position.append([tail_x, tail_y+1])
+                    self._body_position.append([tail_x, tail_y + 1])
 
                 # Adding the new cell right to the tail cell
                 elif tail_x > tail_neighbor_x:
-                    self._body_position.append([tail_x+1, tail_y])
+                    self._body_position.append([tail_x + 1, tail_y])
 
                 # Adding the new cell left to the tail cell
                 elif tail_x < tail_neighbor_x:
-                    self._body_position.append([tail_x-1, tail_y])
+                    self._body_position.append([tail_x - 1, tail_y])
 
             # In case the length of the snake is 1.  This piece of code runs only once - when the snake is created.
             else:
                 if self._direction == Direction.DOWN:
-                    self._body_position.append([tail_x, tail_y-1])
+                    self._body_position.append([tail_x, tail_y - 1])
 
                 elif self._direction == Direction.UP:
-                    self._body_position.append([tail_x, tail_y+1])
+                    self._body_position.append([tail_x, tail_y + 1])
 
                 elif self._direction == Direction.LEFT:
-                    self._body_position.append([tail_x+1, tail_y])
+                    self._body_position.append([tail_x + 1, tail_y])
 
                 elif self._direction == Direction.RIGHT:
-                    self._body_position.append([tail_x-1, tail_y])
+                    self._body_position.append([tail_x - 1, tail_y])
 
             self._length += 1
 
@@ -165,9 +162,9 @@ class Snake:
         elif direction == Direction.DOWN:
             if self._direction == Direction.RIGHT or self._direction == Direction.LEFT:
                 self._direction = Direction.DOWN
-        
+
         elif direction == Direction.CONTINUE or direction is None:
-            pass # Continue in the same direction
+            pass  # Continue in the same direction
 
     def _move_one_cell(self):
         # Changes the position of the snake's head.
@@ -183,9 +180,8 @@ class Snake:
         elif self._direction == Direction.RIGHT:
             head[0] += 1
 
-        self._body_position.pop() # Removing tail
-        self._body_position.insert(0, head) # Inserting new head
-        
+        self._body_position.pop()  # Removing tail
+        self._body_position.insert(0, head)  # Inserting new head
 
     def _shrink(self, shrinking_amount):
         self._length -= min(self._length, shrinking_amount)
@@ -194,7 +190,7 @@ class Snake:
             return
 
         # Removing nodes from the snake
-        self._body_position = self._body_position[:self._length]
-    
+        self._body_position = self._body_position[: self._length]
+
     def __repr__(self) -> str:
         return f"{self._name}"
