@@ -2,9 +2,8 @@
 #  I test the code here so the run.py file stays clean. #
 #########################################################
 
-import sys
 import time
-from random import choice, random
+from random import choice
 
 import pygame
 
@@ -21,8 +20,6 @@ from snakes_battle.snakes_ai.elitz_snake import ElitzSnake
 from snakes_battle.snakes_ai.manual_control_snake import ManualSnake
 from snakes_battle.snakes_ai.manual_control_snake_wasd import ManualSnakeWASD
 from snakes_battle.snakes_ai.moshes_snake import MoshesSnake
-from snakes_battle.snakes_ai.random_snake import RandomSnake
-from snakes_battle.snakes_ai.simple_snake import SimpleSnake
 from snakes_battle.snakes_ai.yakov_snake import Yakov
 from snakes_battle.snakes_ai.yoav_snake import YoavSnake
 
@@ -57,7 +54,7 @@ def main():
                 run_num += 1
                 print(f'\n\n######################### Game Number {run_num} #########################\n')
                 run_game(playing_classes, ai_classes_available)
-                print(f'\n#################################################################')
+                print('\n#################################################################')
 
             game_menus = True
             game_running = False

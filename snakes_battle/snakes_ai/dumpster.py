@@ -1,9 +1,7 @@
-import copy
 import random
 
 import numpy as np
 
-from snakes_battle.fruit import FruitKind
 from snakes_battle.snake import Direction, Snake
 
 

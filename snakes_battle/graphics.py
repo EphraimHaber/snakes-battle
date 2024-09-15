@@ -6,7 +6,7 @@ import pygame
 
 import settings
 from snakes_battle.board import Board
-from snakes_battle.fruit import Fruit, FruitKind
+from snakes_battle.fruit import FruitKind
 from snakes_battle.snake import Direction
 
 

@@ -1,6 +1,6 @@
 import random
 
-from snakes_battle.snake import Direction, Snake
+from snakes_battle.snake import Snake
 
 
 class RandomSnake(Snake):
