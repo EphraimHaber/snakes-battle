@@ -1,5 +1,5 @@
-from snakes_battle.fruit import FruitKind
 from snakes_battle.snake import Direction, Snake
+from snakes_battle.fruit import FruitKind
 
 
 class Yakov(Snake):
