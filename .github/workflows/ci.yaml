@@ -41,3 +41,10 @@ jobs:
             echo "Ruff passed. Setting workflow status to success."
             echo ::set-output name=status::success
           fi
+
+      - name: Check workflow status
+        run: |
+          if [[ $(echo "${{ steps.ruff_checks.outputs.status }}") != "success" ]]; then
+            echo "Workflow failed. Blocking merge."
+            exit 1
+          fi
