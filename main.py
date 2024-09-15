@@ -47,9 +47,9 @@ def main():
 
     graphics = GameGraphics(ai_classes_available)
 
-    while should_exit == False:
-        if game_running == True:
-            playing_classes = [x['class'] for x in ai_classes_available if x['should_play'] == True]
+    while not should_exit:
+        if game_running:
+            playing_classes = [x['class'] for x in ai_classes_available if x['should_play']]
             if len(playing_classes) > 0:
                 run_num += 1
                 print(f'\n\n######################### Game Number {run_num} #########################\n')
@@ -59,7 +59,7 @@ def main():
             game_menus = True
             game_running = False
 
-        elif game_menus == True:
+        elif game_menus:
             menus_return = run_menus(graphics, ai_classes_available)
             if menus_return['action'] == 'Exit':
                 pygame.quit()
@@ -75,7 +75,7 @@ def run_menus(graphics, ai_classes_available):
     main_menu = True
     snake_picker = False
 
-    while menu_running == True:
+    while menu_running:
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
@@ -85,14 +85,14 @@ def run_menus(graphics, ai_classes_available):
                     if event.key == settings.PYGAME_START_NUMBER_PRESS_VALUE + index:
                         class_dict['should_play'] = not class_dict['should_play']
 
-        if main_menu == True:
+        if main_menu:
             menu_action = graphics.draw_menu(ai_classes_available, events)
             if menu_action == 'Exit':
                 return {'action': menu_action, 'args': ''}
             elif menu_action == 'Play':
                 return {'action': menu_action, 'args': ''}
 
-        elif snake_picker == True:
+        elif snake_picker:
             pass
 
 
@@ -136,7 +136,7 @@ def run_game(playing_classes, ai_classes_available):
                 if event.unicode == '-':
                     frames_delay *= 1.1
 
-        if should_exit == True:
+        if should_exit:
             break
 
         # The AI Snake Should make a decision in which direction to go.
@@ -152,7 +152,7 @@ def run_game(playing_classes, ai_classes_available):
                 print(snake._name, 'was removed from the game: ', e)
                 snake._lost = True
 
-                if settings.DEBUG == True:
+                if settings.DEBUG:
                     raise e
 
                 continue
@@ -169,7 +169,7 @@ def run_game(playing_classes, ai_classes_available):
                 )
                 snake._lost = True
 
-                if settings.DEBUG == True:
+                if settings.DEBUG:
                     raise InvalidDirection(f'Snake not returned a valid direction ({new_direction})')
 
         for snake in board.snakes:

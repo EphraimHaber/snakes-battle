@@ -210,8 +210,6 @@ class ChaimSnake(Snake):
         fruits = [
             f for f in all_fruits if f.kind['name'] in self.beneficial_fruits or f.kind['name'] in self.special_fruits
         ]
-        # ben_fruits = []
-        pos = self.body_position
         index_to_go = 0
         all_snakes = board_state['snakes']
         my_snake = [s for s in all_snakes if self == s]

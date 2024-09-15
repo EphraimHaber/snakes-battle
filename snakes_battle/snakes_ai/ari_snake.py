@@ -1,5 +1,4 @@
-
-from snakes_battle.fruit import *
+from snakes_battle.fruit import FruitKind
 from snakes_battle.snake import Direction, Snake
 
 
@@ -179,7 +178,7 @@ class AriSnake(Snake):
                 if self.direction != Direction.UP:
                     return Direction.DOWN
             return Direction.CONTINUE
-        except:
+        except Exception:
             return Direction.CONTINUE
 
     def dist_fruit(self, fruit):
@@ -226,8 +225,6 @@ class AriSnake(Snake):
         enemy_snakes = self.find_closet_enemy_snakes(snakes)
         x_head = self.head[0]
         y_head = self.head[1]
-        limit_x = self.border_cells[-1][0]
-        limit_y = self.border_cells[-1][1]
 
         mapping_pos = {
             Direction.RIGHT: [x_head + 1, y_head],
@@ -254,13 +251,13 @@ class AriSnake(Snake):
                 return False
 
         if enemy_snakes:
-            if (self.knife == False and self.king == False) or (self.knife and self.length < enemy_snakes[0].length):
+            if (not self.knife and not self.king) or (self.knife and self.length < enemy_snakes[0].length):
                 for snake in enemy_snakes:
                     for bad in bad_pos:
                         if bad == snake.head:
                             return False
 
-            if (self.knife == False and self.king == False) or (self.knife and self.length > enemy_snakes[0].length):
+            if (not self.knife and not self.king) or (self.knife and self.length > enemy_snakes[0].length):
                 for snake in enemy_snakes:
                     if next_pos in snake.body_position[1:]:
                         return False

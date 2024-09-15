@@ -23,11 +23,12 @@ class Dumpster(Snake):
         head = self.head
         fruits = board_state['fruits']
         snakes = board_state['snakes']
-        enemy_snake = None
-        enemy_snake_head = None
+        # enemy_snake = None
+        # enemy_snake_head = None
         if len(snakes) > 1:
-            enemy_snake = snakes[1]
-            enemy_snake_head = snakes[1].head
+            # enemy_snake = snakes[1]
+            # enemy_snake_head = snakes[1].head
+            pass
         boarder_cell_list = [list(elem) for elem in self.border_cells]
         skull_pos = [-11, -11]
         for fruit in fruits:
@@ -35,8 +36,8 @@ class Dumpster(Snake):
                 skull_pos[0] = fruit.pos[0]
                 skull_pos[1] = fruit.pos[1]
 
-        beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ['STRAWBERRY', 'DRAGON_FRUIT']]
-        beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
+        # beneficial_fruits = [fruit for fruit in fruits if fruit.kind['name'] in ['STRAWBERRY', 'DRAGON_FRUIT']]
+        # beneficial_fruits_pos = [fruit.pos for fruit in beneficial_fruits]
         harmful_fruits = [fruit for fruit in fruits if fruit.kind['name'] == 'BOMB']
         harmful_fruits_pos = [fruit.pos for fruit in harmful_fruits]
 
@@ -91,9 +92,9 @@ class Dumpster(Snake):
                         available_directions.remove(Direction.DOWN)
         target = self.get_target(board_state, available_directions)
         ally_destination = target
-        ally_distance_to_fruit = [
-            abs(head[0] - fruit_pos[0]) + abs(head[1] - fruit_pos[1]) for fruit_pos in beneficial_fruits_pos
-        ]
+        # ally_distance_to_fruit = [
+        #     abs(head[0] - fruit_pos[0]) + abs(head[1] - fruit_pos[1]) for fruit_pos in beneficial_fruits_pos
+        # ]
 
         # ally_destination = beneficial_fruits_pos[np.argmin(ally_distance_to_fruit)]  # todo abort if closest to enemy
         # todo combat tactics and target selection:
@@ -255,13 +256,13 @@ class Dumpster(Snake):
         if abs(head[0] - enemy_destination[0]) + abs(head[1] - enemy_destination[1]) < enemy_min_distance:
             ally_destination = enemy_destination
 
-        enemy_target_bank = []
+        # enemy_target_bank = []
         special_items = [fruit for fruit in fruits if fruit.kind['name'] in ['SHIELD', 'KING', 'KNIFE']]
 
         shield_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == 'SHIELD']
-        shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'SHIELD']
+        # shield_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'SHIELD']
 
-        king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'KING']
+        # king_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'KING']
         king_pos_list = [fruit.pos for fruit in special_items if fruit.kind['name'] == 'KING']
 
         knife_lifespan_list = [fruit.lifespan for fruit in fruits if fruit.kind['name'] == 'KNIFE']
@@ -274,7 +275,7 @@ class Dumpster(Snake):
                         ally_destination = king_pos_list[i]
                     return ally_destination
         if (self.knife or self.king) and not (enemy_snake.shield or enemy_snake.king):
-            ally_distance_to_target = get_distances_to_fruit(head, enemy_snake.body_position)
+            # ally_distance_to_target = get_distances_to_fruit(head, enemy_snake.body_position)
             target = enemy_snake.body_position[np.argmin(ally_distance_to_fruit)]
             ally_destination = target
             if enemy_snake.length >= 3:

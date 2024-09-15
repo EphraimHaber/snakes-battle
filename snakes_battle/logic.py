@@ -13,7 +13,7 @@ from snakes_battle.snakes_ai.manual_control_snake_wasd import ManualSnakeWASD
 
 
 def apply_snake_logic(board, snake):
-    if snake._lost == True:
+    if snake._lost:
         return
 
     for fruit in board.fruits:
@@ -93,11 +93,11 @@ def apply_snake_logic(board, snake):
                 if snake._body_position[0] == _snake._body_position[i]:
                     # When a snake hits other snake head to head.
                     if snake._body_position[0] == _snake._body_position[0]:
-                        if snake._king == True:
+                        if snake._king:
                             _snake._lost = True
                             return
 
-                        elif _snake._king == True:
+                        elif _snake._king:
                             snake._lost = True
                             return
 
@@ -162,13 +162,13 @@ def apply_logic(board, events):
                 )
                 snake._lost = True
 
-            if snake._lost != True:
+            if not snake._lost:
                 snake._move_one_cell()
 
             apply_snake_logic(board, snake)
 
     for snake in copy.copy(board.snakes):
-        if snake._lost == True:
+        if snake._lost:
             remove_snake(snake, board)  # Removing lost snakes
         else:
             snake._lived_x_frames += 1
@@ -240,7 +240,7 @@ def get_new_fruit_position(board):
 def get_unique_snake_head_position(board: Board):
     # Generating random and unique position to the head of the snake, that will not collide with other snake's tail
     generate_position = True
-    while generate_position == True:
+    while generate_position:
         random_head_position = list(random.choice(board.all_cells_pos))
         too_close = False
         for snake in board.snakes:

@@ -324,7 +324,7 @@ class GameGraphics:
 
             # Drawing powerups the snake has on
             separator_count = 0  # How many powerups are displayed
-            if snake._shield == True:
+            if snake._shield:
                 self.surface.blit(
                     self.images['SHIELD'],
                     [
@@ -334,7 +334,7 @@ class GameGraphics:
                     ],
                 )
                 separator_count += 1
-            if snake._king == True:
+            if snake._king:
                 self.surface.blit(
                     self.images['KING'],
                     [
@@ -344,7 +344,7 @@ class GameGraphics:
                     ],
                 )
                 separator_count += 1
-            if snake._knife == True:
+            if snake._knife:
                 self.surface.blit(
                     self.images['KNIFE'],
                     [
@@ -468,7 +468,7 @@ class GameGraphics:
         )
         self.surface.blit(class_picker_header_text, (settings.CLASS_NAME_START_X, settings.CLASS_NAME_START_Y))
         for index, class_dict in enumerate(ai_classes_available):
-            if class_dict['should_play'] == True:
+            if class_dict['should_play']:
                 text_color = (0, 255, 0)
             else:
                 text_color = (255, 0, 0)
