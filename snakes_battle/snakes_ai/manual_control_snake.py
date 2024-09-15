@@ -1,5 +1,6 @@
 import pygame
-from snakes_battle.snake import Snake, Direction
+
+from snakes_battle.snake import Direction, Snake
 
 
 class ManualSnake(Snake):

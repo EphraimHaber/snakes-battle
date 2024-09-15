@@ -1,6 +1,7 @@
 import math
-from snakes_battle.snake import Snake, Direction
+
 from snakes_battle.fruit import *
+from snakes_battle.snake import Direction, Snake
 
 
 class AriSnake(Snake):

@@ -2,28 +2,29 @@
 #  I test the code here so the run.py file stays clean. #
 #########################################################
 
-from random import choice, random
-import pygame
 import sys
 import time
+from random import choice, random
 
+import pygame
+
+import settings
+from snakes_battle import logic
 from snakes_battle.board import Board
 from snakes_battle.exceptions import InvalidDirection
-from snakes_battle.snakes_ai.random_snake import RandomSnake
-from snakes_battle.snakes_ai.simple_snake import SimpleSnake
-from snakes_battle.snakes_ai.moshes_snake import MoshesSnake
+from snakes_battle.fruit import Fruit, FruitKind
+from snakes_battle.graphics import GameGraphics
+from snakes_battle.snakes_ai.ari_snake import AriSnake
+from snakes_battle.snakes_ai.chaim_snake import ChaimSnake
+from snakes_battle.snakes_ai.dumpster import Dumpster
+from snakes_battle.snakes_ai.elitz_snake import ElitzSnake
 from snakes_battle.snakes_ai.manual_control_snake import ManualSnake
 from snakes_battle.snakes_ai.manual_control_snake_wasd import ManualSnakeWASD
-from snakes_battle.snakes_ai.dumpster import Dumpster
-from snakes_battle.snakes_ai.yoav_snake import YoavSnake
-from snakes_battle.snakes_ai.elitz_snake import ElitzSnake
-from snakes_battle.snakes_ai.chaim_snake import ChaimSnake
-from snakes_battle.snakes_ai.ari_snake import AriSnake
+from snakes_battle.snakes_ai.moshes_snake import MoshesSnake
+from snakes_battle.snakes_ai.random_snake import RandomSnake
+from snakes_battle.snakes_ai.simple_snake import SimpleSnake
 from snakes_battle.snakes_ai.yakov_snake import Yakov
-from snakes_battle import logic
-from snakes_battle.graphics import GameGraphics
-import settings
-from snakes_battle.fruit import FruitKind, Fruit
+from snakes_battle.snakes_ai.yoav_snake import YoavSnake
 
 
 def main():

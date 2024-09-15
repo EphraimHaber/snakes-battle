@@ -1,9 +1,10 @@
 # All the rules of the game should be defined here.
 # For example, If snake eats a fruit, it grows. If a snake hits a border it loses and so on...
 
-import random
-import math
 import copy
+import math
+import random
+
 import settings
 from snakes_battle.board import Board
 from snakes_battle.fruit import Fruit, FruitKind

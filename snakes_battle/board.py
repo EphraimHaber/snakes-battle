@@ -1,8 +1,8 @@
-import settings
-import random
 import copy
+import random
 import time
 
+import settings
 from snakes_battle.snake import Snake
 
 

@@ -1,10 +1,11 @@
-from random import choice
-import pygame
+import math
 import os
+from random import choice
+
+import pygame
+
 import settings
 from snakes_battle.board import Board
-import math
-
 from snakes_battle.fruit import Fruit, FruitKind
 from snakes_battle.snake import Direction
 

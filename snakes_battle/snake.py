@@ -1,5 +1,5 @@
-from random import randint
 import copy
+from random import randint
 
 
 class Direction:

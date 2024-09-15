@@ -1,9 +1,10 @@
+import copy
 import random
 
 import numpy as np
-import copy
-from snakes_battle.snake import Snake, Direction
+
 from snakes_battle.fruit import FruitKind
+from snakes_battle.snake import Direction, Snake
 
 
 def get_distances_to_fruit(snake_head, fruit_list_pos):

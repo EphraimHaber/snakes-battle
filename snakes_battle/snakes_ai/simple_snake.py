@@ -1,4 +1,4 @@
-from snakes_battle.snake import Snake, Direction
+from snakes_battle.snake import Direction, Snake
 
 
 class SimpleSnake(Snake):

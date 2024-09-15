@@ -1,6 +1,7 @@
-from snakes_battle.snake import Snake, Direction
-from snakes_battle.fruit import FruitKind
 import math
+
+from snakes_battle.fruit import FruitKind
+from snakes_battle.snake import Direction, Snake
 
 
 class YoavSnake(Snake):

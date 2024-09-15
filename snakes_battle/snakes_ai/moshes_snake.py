@@ -1,6 +1,7 @@
 import random
-from snakes_battle.snake import Snake, Direction
+
 from snakes_battle.fruit import FruitKind
+from snakes_battle.snake import Direction, Snake
 
 
 class MoshesSnake(Snake):

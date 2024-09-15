@@ -1,8 +1,9 @@
 from fileinput import close
 from multiprocessing import current_process
 from xml.dom.xmlbuilder import Options
-from snakes_battle.snake import Snake, Direction
+
 from snakes_battle.fruit import FruitKind
+from snakes_battle.snake import Direction, Snake
 
 
 class Yakov(Snake):
